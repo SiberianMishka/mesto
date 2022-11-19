@@ -3,6 +3,8 @@ let profileAbout = document.querySelector('.profile-info__about');
 let formElement = document.querySelector('.popup');
 let inputName = formElement.querySelector('.popup__input-name');
 let inputAbout = formElement.querySelector('.popup__input-about');
+let editButton = document.querySelector('.profile-info__edit-button');
+let closeButton = formElement.querySelector('.popup__close-button');
 
 function openPopup () {
   formElement.classList.add('popup_opened');
@@ -21,10 +23,6 @@ function formSubmitHandler (evt) {
   closePopup();
 };
 
-let editButton = document.querySelector('.profile-info__edit-button');
 editButton.addEventListener('click', openPopup);
-
-let closeButton = formElement.querySelector('.popup__close-button');
 closeButton.addEventListener('click', closePopup);
-
 formElement.addEventListener('submit', formSubmitHandler);

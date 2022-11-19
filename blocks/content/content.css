@@ -1,25 +1,23 @@
 .content {
-  width: calc(100% - 200px*2);
+  width: 100%;
+  max-width: 880px;
   padding: 40px 0 66px;
 }
 
 @media screen and (max-width: 1040px) {
   .content  {
-    width: calc(100% - 140px*2);
-    padding-bottom: 60;
+    padding-bottom: 60px;
   }
 }
 
 @media screen and (max-width: 870px) {
   .content  {
-    width: calc(100% - 80px*2);
-    padding-bottom: 54;
+    padding-bottom: 54px;
   }
 }
 
 @media screen and (max-width: 520px) {
   .content  {
-    width: calc(100% - 19px*2);
     padding: 42px 0 48px;
   }
 }
