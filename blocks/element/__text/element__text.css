@@ -1,0 +1,7 @@
+.element__text {
+  margin: 20px 20px 27px 20px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}

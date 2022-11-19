@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mesto</title>
+    <link rel="stylesheet" href="./pages/index.css">
+  </head>
+<body class="page">
+  <header class="header">
+    <img class="header__logo" alt="Логотип Место" src="./images/logo.svg">
+  </header>
+  <main class="content">
+    <section class="profile">
+      <img class="profile__avatar" alt="Аватар" src="./images/avatar.jpg">
+      <div class="profile-info">
+        <h1 class="profile-info__name">Жак-Ив Кусто</h1>
+        <button class="profile-info__edit-button"></button>
+        <h2 class="profile-info__about">Исследователь океана</h2>
+      </div>
+      <button class="profile__add-button"></button>
+    </section>
+    <section class="elements" aria-label="elements">
+      <ul class="elements__grid">
+        <li class="element">
+          <img class="element__image" alt="улица Стокгольма" src="./images/stockholm.jpg">
+          <div class="element__text">
+            <p class="element__name">Стокгольм</p>
+            <button class="element__like-button"></button>
+          </div>
+        </li>
+        <li class="element">
+          <img class="element__image" alt="улица Окаямы" src="./images/okayama.jpg">
+          <div class="element__text">
+            <p class="element__name">Окаяма</p>
+            <button class="element__like-button"></button>
+          </div>
+        </li>
+        <li class="element">
+          <img class="element__image" alt="улица Джедды" src="./images/jeddah.jpg">
+          <div class="element__text">
+            <p class="element__name">Джедда</p>
+            <button class="element__like-button"></button>
+          </div>
+        </li>
+        <li class="element">
+          <img class="element__image" alt="улица Любляны" src="./images/laibach.jpg">
+          <div class="element__text">
+            <p class="element__name">Любляна</p>
+            <button class="element__like-button"></button>
+          </div>
+        </li>
+        <li class="element">
+          <img class="element__image" alt="улица Ставангера" src="./images/stavanger.jpg">
+          <div class="element__text">
+            <p class="element__name">Ставангер</p>
+            <button class="element__like-button"></button>
+          </div>
+        </li>
+        <li class="element">
+          <img class="element__image" alt="улица Нью-Йорка" src="./images/new-york.jpg">
+          <div class="element__text">
+            <p class="element__name">Нью-йорк</p>
+            <button class="element__like-button"></button>
+          </div>
+        </li>
+      </ul>
+    </section>
+    <!-- popup edit form -->
+    <form class="popup">
+      <div class="popup__container">
+        <button class="popup__close-button"></button>
+        <h2 class="popup__header">Редактировать профиль</h2>
+        <input type="text" class="popup__input popup__input-name">
+        <input type="text" class="popup__input popup__input-about">
+        <button class="popup__submit-button" type="submit">Сохранить</button>
+      </div>
+    </form>
+  </main>
+  <footer class="footer">
+    <p class="footer__copyright">&#169; 2020 Mesto Russia</p>
+  </footer>
+  <script src="./scripts/index.js"></script>
+</body>
+</html>

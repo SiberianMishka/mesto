@@ -1,0 +1,23 @@
+.header {
+  width: calc(100% - 200px*2);
+  padding: 0;
+  border-bottom: 1px solid rgba(84, 84, 84, .7);
+}
+
+@media screen and (max-width: 1040px) {
+  .header  {
+    width: calc(100% - 140px*2);
+  }
+}
+
+@media screen and (max-width: 870px) {
+  .header  {
+    width: calc(100% - 80px*2);
+  }
+}
+
+@media screen and (max-width: 520px) {
+  .header  {
+    width: 100%;
+  }
+}
