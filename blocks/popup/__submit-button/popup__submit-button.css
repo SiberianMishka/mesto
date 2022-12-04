@@ -17,3 +17,12 @@
 .popup__submit-button:hover {
   opacity: 0.8;
 }
+
+@media screen and (max-width: 520px) {
+  .popup__submit-button  {
+    width: 238px;
+    height: 46px;
+    margin-top: 45px;
+    margin-left: 22px;
+  }
+}

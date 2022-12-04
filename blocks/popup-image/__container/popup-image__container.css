@@ -1,0 +1,6 @@
+.popup-image__container {
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  transition: all 0.2s ease-in-out;
+}

@@ -22,54 +22,12 @@
     </section>
     <section class="elements" aria-label="elements">
       <ul class="elements__grid">
-        <li class="element">
-          <img class="element__image" alt="улица Стокгольма" src="./images/stockholm.jpg">
-          <div class="element__text">
-            <p class="element__name">Стокгольм</p>
-            <button class="element__like-button"></button>
-          </div>
-        </li>
-        <li class="element">
-          <img class="element__image" alt="улица Окаямы" src="./images/okayama.jpg">
-          <div class="element__text">
-            <p class="element__name">Окаяма</p>
-            <button class="element__like-button"></button>
-          </div>
-        </li>
-        <li class="element">
-          <img class="element__image" alt="улица Джедды" src="./images/jeddah.jpg">
-          <div class="element__text">
-            <p class="element__name">Джедда</p>
-            <button class="element__like-button"></button>
-          </div>
-        </li>
-        <li class="element">
-          <img class="element__image" alt="улица Любляны" src="./images/laibach.jpg">
-          <div class="element__text">
-            <p class="element__name">Любляна</p>
-            <button class="element__like-button"></button>
-          </div>
-        </li>
-        <li class="element">
-          <img class="element__image" alt="улица Ставангера" src="./images/stavanger.jpg">
-          <div class="element__text">
-            <p class="element__name">Ставангер</p>
-            <button class="element__like-button"></button>
-          </div>
-        </li>
-        <li class="element">
-          <img class="element__image" alt="улица Нью-Йорка" src="./images/new-york.jpg">
-          <div class="element__text">
-            <p class="element__name">Нью-йорк</p>
-            <button class="element__like-button"></button>
-          </div>
-        </li>
       </ul>
     </section>
     <!-- popup edit form -->
-    <div class="popup">
+    <div class="popup popup_edit-profile">
       <div class="popup__container">
-        <button class="popup__close-button"></button>
+        <button class="popup__close-button popup__close-button_edit"></button>
         <h2 class="popup__header">Редактировать профиль</h2>
         <form>
           <input type="text" class="popup__input popup__input-name">
@@ -78,10 +36,40 @@
         </form>
       </div>
     </div>
+    <!-- popup add form -->
+    <div class="popup popup_add-place">
+      <div class="popup__container">
+        <button class="popup__close-button popup__close-button_add"></button>
+        <h2 class="popup__header">Новое место</h2>
+        <form>
+          <input type="text" class="popup__input popup__input-place" placeholder="Название">
+          <input type="text" class="popup__input popup__input-img" placeholder="Ссылка на картинку">
+          <button class="popup__submit-button" type="submit">Создать</button>
+        </form>
+      </div>
+    </div>
+    <!-- popup image -->
+    <div class="popup popup-image">
+      <div class="popup-image__container">
+        <button class="popup__close-button popup-image__close-button"></button>
+        <img class="popup-image__image" alt="Изображение" src="">
+        <p class="popup-image__name"></p>
+      </div>
+    </div>
   </main>
   <footer class="footer">
     <p class="footer__copyright">&#169; 2020 Mesto Russia</p>
   </footer>
+  <template id="element-template">
+    <li class="element">
+      <img class="element__image" alt="Изображение" src="">
+      <div class="element__text">
+        <p class="element__name"></p>
+        <button class="element__like-button"></button>
+      </div>
+      <button class="element__delete-button"></button>
+    </li>
+  </template>
   <script src="./scripts/index.js"></script>
 </body>
 </html>
