@@ -15,59 +15,59 @@
       <img class="profile__avatar" alt="Аватар" src="./images/avatar.jpg">
       <div class="profile-info">
         <h1 class="profile-info__name">Жак-Ив Кусто</h1>
-        <button class="profile-info__edit-button"></button>
+        <button class="profile-info__edit-button" type="button"></button>
         <h2 class="profile-info__about">Исследователь океана</h2>
       </div>
-      <button class="profile__add-button"></button>
+      <button class="profile__add-button" type="button"></button>
     </section>
     <section class="elements" aria-label="elements">
       <ul class="elements__grid">
       </ul>
     </section>
-    <!-- popup edit form -->
-    <div class="popup popup_edit-profile">
-      <div class="popup__container">
-        <button class="popup__close-button popup__close-button_edit"></button>
-        <h2 class="popup__header">Редактировать профиль</h2>
-        <form>
-          <input type="text" class="popup__input popup__input-name">
-          <input type="text" class="popup__input popup__input-about">
-          <button class="popup__submit-button" type="submit">Сохранить</button>
-        </form>
-      </div>
-    </div>
-    <!-- popup add form -->
-    <div class="popup popup_add-place">
-      <div class="popup__container">
-        <button class="popup__close-button popup__close-button_add"></button>
-        <h2 class="popup__header">Новое место</h2>
-        <form>
-          <input type="text" class="popup__input popup__input-place" placeholder="Название">
-          <input type="text" class="popup__input popup__input-img" placeholder="Ссылка на картинку">
-          <button class="popup__submit-button" type="submit">Создать</button>
-        </form>
-      </div>
-    </div>
-    <!-- popup image -->
-    <div class="popup popup-image">
-      <div class="popup-image__container">
-        <button class="popup__close-button popup-image__close-button"></button>
-        <img class="popup-image__image" alt="Изображение" src="URL">
-        <p class="popup-image__name"></p>
-      </div>
-    </div>
   </main>
   <footer class="footer">
     <p class="footer__copyright">&#169; 2020 Mesto Russia</p>
   </footer>
+  <!-- popup edit form -->
+  <div class="popup popup_edit-profile">
+    <div class="popup__container">
+      <button class="popup__close-button" type="button"></button>
+      <h2 class="popup__header">Редактировать профиль</h2>
+      <form class="popup__form profile-form" name="profile-form">
+        <input type="text" class="popup__input popup__input-name" name="input-name">
+        <input type="text" class="popup__input popup__input-about" name="input-about">
+        <button class="popup__submit-button" type="submit">Сохранить</button>
+      </form>
+    </div>
+  </div>
+  <!-- popup add form -->
+  <div class="popup popup_add-place">
+    <div class="popup__container">
+      <button class="popup__close-button" type="button"></button>
+      <h2 class="popup__header">Новое место</h2>
+      <form class="popup__form add-form"  name="add-form">
+        <input type="text" class="popup__input popup__input-place" name="input-place" placeholder="Название">
+        <input type="text" class="popup__input popup__input-img" name="input-img" placeholder="Ссылка на картинку">
+        <button class="popup__submit-button" type="submit">Создать</button>
+      </form>
+    </div>
+  </div>
+  <!-- popup image -->
+  <div class="popup popup-image">
+    <div class="popup-image__container">
+      <button class="popup__close-button" type="button"></button>
+      <img class="popup-image__image" alt="#" src="#">
+      <p class="popup-image__name"></p>
+    </div>
+  </div>
   <template id="element-template">
     <li class="element">
-      <img class="element__image" alt="Изображение" src="URL">
+      <img class="element__image" alt="#" src="#">
       <div class="element__text">
         <p class="element__name"></p>
-        <button class="element__like-button"></button>
+        <button class="element__like-button" type="button"></button>
       </div>
-      <button class="element__delete-button"></button>
+      <button class="element__delete-button" type="button"></button>
     </li>
   </template>
   <script src="./scripts/index.js"></script>

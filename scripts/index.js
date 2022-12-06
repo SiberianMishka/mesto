@@ -35,18 +35,19 @@ const editProfileElement = document.querySelector('.popup_edit-profile');
 const inputName = editProfileElement.querySelector('.popup__input-name');
 const inputAbout = editProfileElement.querySelector('.popup__input-about');
 const editButton = document.querySelector('.profile-info__edit-button');
-const closeButtonEdit = editProfileElement.querySelector('.popup__close-button_edit');
+const profileForm = editProfileElement.querySelector('.profile-form');
 // Переменные для добавления элемента
 const addPlaceButton = document.querySelector('.profile__add-button');
 const addPlaceElement = document.querySelector('.popup_add-place');
 const inputPlace = addPlaceElement.querySelector('.popup__input-place');
 const inputImage = addPlaceElement.querySelector('.popup__input-img');
-const closeButtonAddPlace = addPlaceElement.querySelector('.popup__close-button_add');
+const addForm = addPlaceElement.querySelector('.add-form');
 // Переменные для попапа изображения
 const popupImageElement = document.querySelector('.popup-image');
 const popupImage = popupImageElement.querySelector('.popup-image__image');
 const popupName = popupImageElement.querySelector('.popup-image__name');
-const closeButtonImage = popupImageElement.querySelector('.popup-image__close-button');
+// Переменные для крестиков
+const closeButtons = document.querySelectorAll('.popup__close-button');
 // Создание элементов по шаблону
 function createElement(item) {
   const element = elementTemplate.cloneNode(true);
@@ -58,6 +59,7 @@ function createElement(item) {
   deleteButton.addEventListener('click', handleDeleteButtonClick);
   elementImage.addEventListener('click', handleElementImageClick);
   elementImage.src = item.link;
+  elementImage.alt = item.name;
   elementName.textContent = item.name;
   return element;
 }
@@ -66,6 +68,22 @@ const renderElement = (item, wrapElement) => {
   const element = createElement(item);
   wrapElement.prepend(element);
 }
+
+// Универсальные функции открытия и закрытия попапа
+function openPopup(popup) {
+  popup.classList.add('popup_opened');
+}
+
+function closePopup(popup) {
+  popup.classList.remove('popup_opened');
+}
+
+// Универсальная функция обработки крестиков
+closeButtons.forEach((button) => {
+  const popup = button.closest('.popup');
+  button.addEventListener('click', () => closePopup(popup));
+});
+
 // Функции для обработки лайков, удалений и открытия-закрытия попапа изображения
 const handleLikeButtonClick = (e) => {
   e.target.classList.toggle('element__like-button_active');
@@ -77,12 +95,13 @@ const handleDeleteButtonClick = (e) => {
 
 const handleElementImageClick = (e) => {
   popupImage.src = e.target.src;
-  popupName.textContent = e.target.nextElementSibling.textContent;
-  popupImageElement.classList.add('popup_opened');
+  popupImage.alt = e.target.alt;
+  popupName.textContent = e.target.alt;
+  openPopup(popupImageElement);
 }
 
 function closeImagePopup() {
-  popupImageElement.classList.remove('popup_opened');
+  closePopup(popupImageElement);
 }
 // Заполнение элементов из массива
 initialCards.forEach(function(item) {
@@ -90,16 +109,16 @@ initialCards.forEach(function(item) {
 })
 // Функции попапа редактирования профиля
 function openEditPopup() {
-  editProfileElement.classList.add('popup_opened');
   inputName.value = profileName.textContent;
   inputAbout.value = profileAbout.textContent;
+  openPopup(editProfileElement);
 };
 
 function closeEditPopup() {
-  editProfileElement.classList.remove('popup_opened');
+  closePopup(editProfileElement);
 };
 
-function formEditSubmitHandler (evt) {
+function handleProfileFormSubmit (evt) {
   evt.preventDefault();
   profileName.textContent = inputName.value;
   profileAbout.textContent = inputAbout.value;
@@ -107,16 +126,16 @@ function formEditSubmitHandler (evt) {
 };
 // Функции попапа добавления элемента
 function openAddPlacePopup() {
-  addPlaceElement.classList.add('popup_opened');
   inputPlace.value = '';
   inputImage.value = '';
+  openPopup(addPlaceElement);
 };
 
 function closeAddPlacePopup() {
-  addPlaceElement.classList.remove('popup_opened');
+  closePopup(addPlaceElement);
 };
 
-function formAddSubmitHandler(e) {
+function handleAddFormSubmit(e) {
   e.preventDefault();
   const newElement = {
     name: inputPlace.value,
@@ -126,14 +145,8 @@ function formAddSubmitHandler(e) {
   closeAddPlacePopup();
 };
 // Слушатели попапа редактирования профиля
-editProfileElement.addEventListener('submit', formEditSubmitHandler);
-closeButtonEdit.addEventListener('click', closeEditPopup);
+profileForm.addEventListener('submit', handleProfileFormSubmit);
 editButton.addEventListener('click', openEditPopup);
 // Слушатели попапа добавления элемента
 addPlaceButton.addEventListener('click', openAddPlacePopup);
-closeButtonAddPlace.addEventListener('click', closeAddPlacePopup);
-addPlaceElement.addEventListener('submit', formAddSubmitHandler);
-// Слушатель попапа изображения
-closeButtonImage.addEventListener('click', closeImagePopup);
-
-// TODO: Сделать универсальные функции закрытия и сабмита для попапов, удалить дублирование кнопок
+addForm.addEventListener('submit', handleAddFormSubmit);
