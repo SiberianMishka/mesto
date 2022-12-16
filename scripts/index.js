@@ -69,13 +69,32 @@ const renderElement = (item, wrapElement) => {
   wrapElement.prepend(element);
 }
 
+// Действия при нажатии Esc
+const handleEscClick = (e) => {
+  const openedPopup = document.querySelector('.popup_opened');
+  if (e.key === "Escape") {
+    closePopup(openedPopup);
+  }
+}
+
+// Закрытие по оверлею
+const handleOverlayClick = (e) => {
+  const openedPopup = document.querySelector('.popup_opened');
+  if (!e.target.closest('.popup__container') && !e.target.closest('.popup-image__container')) {
+    closePopup(openedPopup);
+  }
+}
+
 // Универсальные функции открытия и закрытия попапа
 function openPopup(popup) {
   popup.classList.add('popup_opened');
+  document.addEventListener('keydown', handleEscClick);
+  popup.addEventListener('click', handleOverlayClick);
 }
 
 function closePopup(popup) {
   popup.classList.remove('popup_opened');
+  document.removeEventListener('keydown', handleEscClick);
 }
 
 // Универсальная функция обработки крестиков
@@ -118,16 +137,18 @@ function closeEditPopup() {
   closePopup(editProfileElement);
 };
 
-function handleProfileFormSubmit (evt) {
-  evt.preventDefault();
+function handleProfileFormSubmit (e) {
+  e.preventDefault();
   profileName.textContent = inputName.value;
   profileAbout.textContent = inputAbout.value;
   closeEditPopup();
 };
 // Функции попапа добавления элемента
 function openAddPlacePopup() {
-  inputPlace.value = '';
-  inputImage.value = '';
+  addForm.reset();
+  button = addPlaceElement.querySelector('.popup__button');
+  button.classList.add('popup__button_disabled');
+  button.disabled = 'disabled';
   openPopup(addPlaceElement);
 };
 

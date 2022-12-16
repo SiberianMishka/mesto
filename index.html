@@ -6,70 +6,116 @@
     <title>Mesto</title>
     <link rel="stylesheet" href="./pages/index.css">
   </head>
-<body class="page">
-  <header class="header">
-    <img class="header__logo" alt="Логотип Место" src="./images/logo.svg">
-  </header>
-  <main class="content">
-    <section class="profile">
-      <img class="profile__avatar" alt="Аватар" src="./images/avatar.jpg">
-      <div class="profile-info">
-        <h1 class="profile-info__name">Жак-Ив Кусто</h1>
-        <button class="profile-info__edit-button" type="button"></button>
-        <h2 class="profile-info__about">Исследователь океана</h2>
+  <body class="page">
+    <header class="header">
+      <img class="header__logo" alt="Логотип Место" src="./images/logo.svg">
+    </header>
+    <main class="content">
+      <section class="profile">
+        <img class="profile__avatar" alt="Аватар" src="./images/avatar.jpg">
+        <div class="profile-info">
+          <h1 class="profile-info__name">Жак-Ив Кусто</h1>
+          <button class="profile-info__edit-button" type="button"></button>
+          <h2 class="profile-info__about">Исследователь океана</h2>
+        </div>
+        <button class="profile__add-button" type="button"></button>
+      </section>
+      <section class="elements" aria-label="elements">
+        <ul class="elements__grid"></ul>
+      </section>
+    </main>
+    <footer class="footer">
+      <p class="footer__copyright">&#169; 2020 Mesto Russia</p>
+    </footer>
+    <!-- popup edit form -->
+    <div class="popup popup_edit-profile">
+      <div class="popup__container">
+        <button class="popup__close-button" type="button"></button>
+        <h2 class="popup__header">Редактировать профиль</h2>
+        <form class="popup__form profile-form" name="profile-form" novalidate>
+          <input
+            class="popup__input popup__input-name"
+            name="input-name"
+            id="name"
+            type="text"
+            placeholder="Имя"
+            minlength="2"
+            maxlength="40"
+            required
+          >
+          <span class="popup__error popup__error_visible" id="name-error"></span
+          >
+          <input
+            class="popup__input popup__input-about"
+            name="input-about"
+            id="about"
+            type="text"
+            placeholder="О себе"
+            minlength="2"
+            maxlength="200"
+            required
+          >
+          <span class="popup__error popup__error_visible" id="about-error"></span
+          >
+          <button class="popup__button" type="submit">
+            Сохранить
+          </button>
+        </form>
       </div>
-      <button class="profile__add-button" type="button"></button>
-    </section>
-    <section class="elements" aria-label="elements">
-      <ul class="elements__grid">
-      </ul>
-    </section>
-  </main>
-  <footer class="footer">
-    <p class="footer__copyright">&#169; 2020 Mesto Russia</p>
-  </footer>
-  <!-- popup edit form -->
-  <div class="popup popup_edit-profile">
-    <div class="popup__container">
-      <button class="popup__close-button" type="button"></button>
-      <h2 class="popup__header">Редактировать профиль</h2>
-      <form class="popup__form profile-form" name="profile-form">
-        <input type="text" class="popup__input popup__input-name" name="input-name">
-        <input type="text" class="popup__input popup__input-about" name="input-about">
-        <button class="popup__submit-button" type="submit">Сохранить</button>
-      </form>
     </div>
-  </div>
-  <!-- popup add form -->
-  <div class="popup popup_add-place">
-    <div class="popup__container">
-      <button class="popup__close-button" type="button"></button>
-      <h2 class="popup__header">Новое место</h2>
-      <form class="popup__form add-form"  name="add-form">
-        <input type="text" class="popup__input popup__input-place" name="input-place" placeholder="Название">
-        <input type="text" class="popup__input popup__input-img" name="input-img" placeholder="Ссылка на картинку">
-        <button class="popup__submit-button" type="submit">Создать</button>
-      </form>
-    </div>
-  </div>
-  <!-- popup image -->
-  <div class="popup popup-image">
-    <div class="popup-image__container">
-      <button class="popup__close-button" type="button"></button>
-      <img class="popup-image__image" alt="#" src="#">
-      <p class="popup-image__name"></p>
-    </div>
-  </div>
-  <template id="element-template">
-    <li class="element">
-      <img class="element__image" alt="#" src="#">
-      <div class="element__text">
-        <p class="element__name"></p>
-        <button class="element__like-button" type="button"></button>
+    <!-- popup add form -->
+    <div class="popup popup_add-place">
+      <div class="popup__container">
+        <button class="popup__close-button" type="button"></button>
+        <h2 class="popup__header">Новое место</h2>
+        <form class="popup__form add-form" name="add-form" novalidate>
+          <input
+            class="popup__input popup__input-place"
+            name="input-place"
+            id="place"
+            type="text"
+            placeholder="Название"
+            minlength="2"
+            maxlength="30"
+            required
+          >
+          <span class="popup__error popup__error_visible" id="place-error"></span
+          >
+          <input
+            class="popup__input popup__input-img"
+            name="input-img"
+            id="link"
+            type="url"
+            placeholder="Ссылка на картинку"
+            required
+          >
+          <span class="popup__error popup__error_visible" id="link-error"></span
+          >
+          <button class="popup__button popup__button_disabled" type="submit">
+            Создать
+          </button>
+        </form>
       </div>
-      <button class="element__delete-button" type="button"></button>
-    </li>
-  </template>
-  <script src="./scripts/index.js"></script>
-</body>
+    </div>
+    <!-- popup image -->
+    <div class="popup popup-image">
+      <div class="popup-image__container">
+        <button class="popup__close-button" type="button"></button>
+        <img class="popup-image__image" alt="#" src="#">
+        <p class="popup-image__name"></p>
+      </div>
+    </div>
+    <template id="element-template">
+      <li class="element">
+        <img class="element__image" alt="#" src="#">
+        <div class="element__text">
+          <p class="element__name"></p>
+          <button class="element__like-button" type="button"></button>
+        </div>
+        <button class="element__delete-button" type="button"></button>
+      </li>
+    </template>
+    <script src="./scripts/index.js"></script>
+    <script src="./scripts/validate.js"></script>
+  </body>
 </html>
