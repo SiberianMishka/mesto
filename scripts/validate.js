@@ -1,24 +1,33 @@
-const validationConfig = {
-  formSelector: '.popup__form',
-  inputSelector: '.popup__input',
-  submitButtonSelector: '.popup__button',
-  inactiveButtonClass: 'popup__button_disabled',
-  inputErrorClass: 'popup__input_type_error',
-  errorClass: 'popup__error_visible'
-};
+hideError = (error, input, config) => {
+  error.textContent = '';
+  error.classList.remove(config.errorClass);
+  input.classList.remove(config.inputErrorClass);
+}
+
+showError = (error, input, config) => {
+  error.textContent = input.validationMessage;
+  error.classList.add(config.errorClass);
+  input.classList.add(config.inputErrorClass);
+}
+
+enableButton = (button, config) => {
+  button.classList.remove(config.inactiveButtonClass);
+  button.disabled = '';
+}
+
+disableButton = (button, config) => {
+  button.classList.add(config.inactiveButtonClass);
+  button.disabled = 'disabled';
+}
 
 // Проверка валидности и демонстрация ошибки
 const checkInputValidity = (input, config) => {
   const error = document.querySelector(`#${input.id}-error`);
 
   if (input.validity.valid) {
-    error.textContent = '';
-    error.classList.remove(config.errorClass);
-    input.classList.remove(config.inputErrorClass);
+    hideError(error, input, config);
   } else {
-    error.textContent = input.validationMessage;
-    error.classList.add(config.errorClass);
-    input.classList.add(config.inputErrorClass);
+    showError(error, input, config);
   }
 }
 
@@ -27,32 +36,26 @@ const toggleSubmitButton = (inputs, button, config) => {
   const isFormValid = inputs.every(input => input.validity.valid);
 
   if(isFormValid) {
-    button.classList.remove(config.inactiveButtonClass);
-    button.disabled = '';
+    enableButton(button, config);
   } else {
-    button.classList.add(config.inactiveButtonClass);
-    button.disabled = 'disabled';
+    disableButton(button, config);
   }
 }
 
 const enableValidation = (config) => {
   const { formSelector, inputSelector, submitButtonSelector, ...restConfig } = config
 
-  const forms = [...document.querySelectorAll(formSelector)];
+  const forms = document.querySelectorAll(formSelector);
 
   forms.forEach(form => {
     const inputs = [...form.querySelectorAll(inputSelector)];
     const button = form.querySelector(submitButtonSelector);
 
-    form.addEventListener('submit', (e) => {
-      e.preventDefault();
-    })
-
     inputs.forEach(input => {
       input.addEventListener('input', () => {
         // убрать или показать ошибку
         checkInputValidity(input, restConfig);
-        // деактивировать кнопку
+        // деактивировать или активировать кнопку
         toggleSubmitButton(inputs, button, restConfig);
       })
     })

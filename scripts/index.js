@@ -1,30 +1,3 @@
-const initialCards = [
-  {
-    name: 'Архыз',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-  },
-  {
-    name: 'Челябинская область',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
-  },
-  {
-    name: 'Иваново',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
-  },
-  {
-    name: 'Камчатка',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
-  },
-  {
-    name: 'Холмогорский район',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
-  },
-  {
-    name: 'Байкал',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-  }
-];
-
 // Переменные для шаблона элементов
 const elementsList = document.querySelector('.elements__grid');
 const elementTemplate = document.querySelector('#element-template').content.querySelector('.element');
@@ -39,6 +12,7 @@ const profileForm = editProfileElement.querySelector('.profile-form');
 // Переменные для добавления элемента
 const addPlaceButton = document.querySelector('.profile__add-button');
 const addPlaceElement = document.querySelector('.popup_add-place');
+const addPlaceSubmitButton = addPlaceElement.querySelector('.popup__button');
 const inputPlace = addPlaceElement.querySelector('.popup__input-place');
 const inputImage = addPlaceElement.querySelector('.popup__input-img');
 const addForm = addPlaceElement.querySelector('.add-form');
@@ -71,17 +45,16 @@ const renderElement = (item, wrapElement) => {
 
 // Действия при нажатии Esc
 const handleEscClick = (e) => {
-  const openedPopup = document.querySelector('.popup_opened');
   if (e.key === "Escape") {
+    const openedPopup = document.querySelector('.popup_opened');
     closePopup(openedPopup);
   }
 }
 
 // Закрытие по оверлею
 const handleOverlayClick = (e) => {
-  const openedPopup = document.querySelector('.popup_opened');
-  if (!e.target.closest('.popup__container') && !e.target.closest('.popup-image__container')) {
-    closePopup(openedPopup);
+  if (e.target.closest('.popup')) {
+    closePopup(e.target);
   }
 }
 
@@ -95,6 +68,7 @@ function openPopup(popup) {
 function closePopup(popup) {
   popup.classList.remove('popup_opened');
   document.removeEventListener('keydown', handleEscClick);
+  popup.removeEventListener('click', handleOverlayClick);
 }
 
 // Универсальная функция обработки крестиков
@@ -146,9 +120,7 @@ function handleProfileFormSubmit (e) {
 // Функции попапа добавления элемента
 function openAddPlacePopup() {
   addForm.reset();
-  button = addPlaceElement.querySelector('.popup__button');
-  button.classList.add('popup__button_disabled');
-  button.disabled = 'disabled';
+  disableButton(addPlaceSubmitButton, validationConfig);
   openPopup(addPlaceElement);
 };
 

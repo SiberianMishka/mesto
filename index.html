@@ -5,6 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mesto</title>
     <link rel="stylesheet" href="./pages/index.css">
+    <script defer src="./scripts/constants.js"></script>
+    <script defer src="./scripts/index.js"></script>
+    <script defer src="./scripts/validate.js"></script>
+
   </head>
   <body class="page">
     <header class="header">
@@ -15,10 +19,10 @@
         <img class="profile__avatar" alt="Аватар" src="./images/avatar.jpg">
         <div class="profile-info">
           <h1 class="profile-info__name">Жак-Ив Кусто</h1>
-          <button class="profile-info__edit-button" type="button"></button>
+          <button class="profile-info__edit-button" type="button" aria-label="Редактировать профиль"></button>
           <h2 class="profile-info__about">Исследователь океана</h2>
         </div>
-        <button class="profile__add-button" type="button"></button>
+        <button class="profile__add-button" type="button" aria-label="Добавить карточку"></button>
       </section>
       <section class="elements" aria-label="elements">
         <ul class="elements__grid"></ul>
@@ -30,7 +34,7 @@
     <!-- popup edit form -->
     <div class="popup popup_edit-profile">
       <div class="popup__container">
-        <button class="popup__close-button" type="button"></button>
+        <button class="popup__close-button" type="button" aria-label="Закрыть попап"></button>
         <h2 class="popup__header">Редактировать профиль</h2>
         <form class="popup__form profile-form" name="profile-form" novalidate>
           <input
@@ -57,7 +61,7 @@
           >
           <span class="popup__error popup__error_visible" id="about-error"></span
           >
-          <button class="popup__button" type="submit">
+          <button class="popup__button" type="submit" aria-label="Сохранить">
             Сохранить
           </button>
         </form>
@@ -66,7 +70,7 @@
     <!-- popup add form -->
     <div class="popup popup_add-place">
       <div class="popup__container">
-        <button class="popup__close-button" type="button"></button>
+        <button class="popup__close-button" type="button" aria-label="Закрыть попап"></button>
         <h2 class="popup__header">Новое место</h2>
         <form class="popup__form add-form" name="add-form" novalidate>
           <input
@@ -91,7 +95,7 @@
           >
           <span class="popup__error popup__error_visible" id="link-error"></span
           >
-          <button class="popup__button popup__button_disabled" type="submit">
+          <button class="popup__button popup__button_disabled" type="submit" aria-label="Сохранить">
             Создать
           </button>
         </form>
@@ -100,7 +104,7 @@
     <!-- popup image -->
     <div class="popup popup-image">
       <div class="popup-image__container">
-        <button class="popup__close-button" type="button"></button>
+        <button class="popup__close-button" type="button" aria-label="Закрыть попап"></button>
         <img class="popup-image__image" alt="#" src="#">
         <p class="popup-image__name"></p>
       </div>
@@ -110,12 +114,10 @@
         <img class="element__image" alt="#" src="#">
         <div class="element__text">
           <p class="element__name"></p>
-          <button class="element__like-button" type="button"></button>
+          <button class="element__like-button" type="button" aria-label="Лайк"></button>
         </div>
-        <button class="element__delete-button" type="button"></button>
+        <button class="element__delete-button" type="button" aria-label="Удалить"></button>
       </li>
     </template>
-    <script src="./scripts/index.js"></script>
-    <script src="./scripts/validate.js"></script>
   </body>
 </html>
