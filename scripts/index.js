@@ -53,7 +53,7 @@ const handleEscClick = (e) => {
 
 // Закрытие по оверлею
 const handleOverlayClick = (e) => {
-  if (e.target.closest('.popup')) {
+  if (e.target.classList.contains('popup')) {
     closePopup(e.target);
   }
 }
