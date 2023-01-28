@@ -5,10 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mesto</title>
     <link rel="stylesheet" href="./pages/index.css">
-    <script defer src="./scripts/constants.js"></script>
-    <script defer src="./scripts/index.js"></script>
-    <script defer src="./scripts/validate.js"></script>
-
+    <script defer type="module" src="./scripts/constants.js"></script>
+    <script defer type="module" src="./scripts/handleElementImageClick.js"></script>
+    <script defer type="module" src="./scripts/Card.js"></script>
+    <script defer type="module" src="./scripts/FormValidator.js"></script>
+    <script defer type="module" src="./scripts/index.js"></script>
   </head>
   <body class="page">
     <header class="header">
@@ -47,8 +48,7 @@
             maxlength="40"
             required
           >
-          <span class="popup__error popup__error_visible" id="name-error"></span
-          >
+          <span class="popup__error" id="name-error"></span>
           <input
             class="popup__input popup__input-about"
             name="input-about"
@@ -59,8 +59,7 @@
             maxlength="200"
             required
           >
-          <span class="popup__error popup__error_visible" id="about-error"></span
-          >
+          <span class="popup__error" id="about-error"></span>
           <button class="popup__button" type="submit" aria-label="Сохранить">
             Сохранить
           </button>
@@ -83,8 +82,7 @@
             maxlength="30"
             required
           >
-          <span class="popup__error popup__error_visible" id="place-error"></span
-          >
+          <span class="popup__error" id="place-error"></span>
           <input
             class="popup__input popup__input-img"
             name="input-img"
@@ -93,8 +91,7 @@
             placeholder="Ссылка на картинку"
             required
           >
-          <span class="popup__error popup__error_visible" id="link-error"></span
-          >
+          <span class="popup__error" id="link-error"></span>
           <button class="popup__button popup__button_disabled" type="submit" aria-label="Сохранить">
             Создать
           </button>
@@ -109,7 +106,7 @@
         <p class="popup-image__name"></p>
       </div>
     </div>
-    <template id="element-template">
+    <template class="element-template" id="element-template">
       <li class="element">
         <img class="element__image" alt="#" src="#">
         <div class="element__text">
