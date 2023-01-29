@@ -5,13 +5,15 @@ import { Card } from "./Card.js";
 // Переменные для редактирования профиля
 const profileName = document.querySelector('.profile-info__name');
 const profileAbout = document.querySelector('.profile-info__about');
-const editProfileElement = document.querySelector('.popup_edit-profile');
-const inputName = editProfileElement.querySelector('.popup__input-name');
-const inputAbout = editProfileElement.querySelector('.popup__input-about');
+const profileElement = document.querySelector('.popup_edit-profile');
+const inputName = profileElement.querySelector('.popup__input-name');
+const inputAbout = profileElement.querySelector('.popup__input-about');
 const editButton = document.querySelector('.profile-info__edit-button');
-const profileForm = editProfileElement.querySelector('.profile-form');
+const profileForm = profileElement.querySelector('.profile-form');
 // Переменные для попапа изображения
 const popupImageElement = document.querySelector('.popup-image');
+const popupImage = popupImageElement.querySelector('.popup-image__image');
+const popupName = popupImageElement.querySelector('.popup-image__name');
 // Переменные для крестиков
 const closeButtons = document.querySelectorAll('.popup__close-button');
 // Переменные для шаблона элементов
@@ -67,11 +69,11 @@ function closeImagePopup() {
 function openEditPopup() {
   inputName.value = profileName.textContent;
   inputAbout.value = profileAbout.textContent;
-  openPopup(editProfileElement);
+  openPopup(profileElement);
 };
 
 function closeEditPopup() {
-  closePopup(editProfileElement);
+  closePopup(profileElement);
 };
 
 function handleProfileFormSubmit (e) {
@@ -81,13 +83,21 @@ function handleProfileFormSubmit (e) {
   closeEditPopup();
 };
 
+// Открытие попапа изображения
+function handleElementImageClick(link, name) {
+  popupImage.src = link;
+  popupImage.alt = name;
+  popupName.textContent = name;
+  openPopup(popupImageElement);
+}
+
 // Слушатели попапа редактирования профиля
 profileForm.addEventListener('submit', handleProfileFormSubmit);
 editButton.addEventListener('click', openEditPopup);
 
 // Создание элементов по шаблону
 function createCard(cardData) {
-  const card = new Card(cardData, ".element-template");
+  const card = new Card(cardData, ".element-template", handleElementImageClick);
   const element = card.generateCard();
   return element;
 }
@@ -123,10 +133,10 @@ function handleAddFormSubmit(e) {
 };
 
 // Создание объектов валидатора форм
-[...document.forms].forEach((form) => {
-  const formValidator = new FormValidator(validationConfig, form);
-  formValidator.enableValidation();
-});
+const profileValidation = new FormValidator(validationConfig, profileForm);
+const newCardValidation = new FormValidator(validationConfig, addForm);
+profileValidation.enableValidation();
+newCardValidation.enableValidation();
 
 // Слушатели попапа добавления элемента
 addPlaceButton.addEventListener('click', openAddPlacePopup);

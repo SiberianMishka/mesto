@@ -1,4 +1,3 @@
-
 export class FormValidator {
   constructor(config, form) {
     this._formSelector = config.formSelector;
@@ -28,12 +27,12 @@ export class FormValidator {
 
   _enableButton(button) {
     button.classList.remove(this._inactiveButtonClass);
-    button.disabled = '';
+    button.disabled = false;
   }
 
   _disableButton(button) {
     button.classList.add(this._inactiveButtonClass);
-    button.disabled = 'disabled';
+    button.disabled = true;
   }
 
   // Проверка валидности и демонстрация ошибки
@@ -52,10 +51,19 @@ export class FormValidator {
     const isFormValid = inputs.every(input => input.validity.valid);
 
     if(isFormValid) {
-      _enableButton(button);
+      this._enableButton(button);
     } else {
-      _disableButton(button);
+      this._disableButton(button);
     }
+  }
+
+  // Очистка полей формы от ошибок
+  resetValidation() {
+    this._toggleSubmitButton();
+
+    this._inputs.forEach((inputElement) => {
+      this._hideError(inputElement);
+    });
   }
 
   enableValidation() {
