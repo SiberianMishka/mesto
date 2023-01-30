@@ -47,13 +47,13 @@ export class FormValidator {
   }
 
   // Изменение состояния кнопки
-  _toggleSubmitButton(inputs, button) {
-    const isFormValid = inputs.every(input => input.validity.valid);
+  _toggleSubmitButton() {
+    const isFormValid = this._inputs.every(input => input.validity.valid);
 
     if(isFormValid) {
-      this._enableButton(button);
+      this._enableButton(this._button);
     } else {
-      this._disableButton(button);
+      this._disableButton(this._button);
     }
   }
 
@@ -72,7 +72,7 @@ export class FormValidator {
         // убрать или показать ошибку
         this._checkInputValidity(input);
         // деактивировать или активировать кнопку
-        this._toggleSubmitButton(this._inputs, this._button);
+        this._toggleSubmitButton();
       })
     })
   }

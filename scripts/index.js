@@ -6,9 +6,9 @@ import { Card } from "./Card.js";
 const profileName = document.querySelector('.profile-info__name');
 const profileAbout = document.querySelector('.profile-info__about');
 const profileElement = document.querySelector('.popup_edit-profile');
-const inputName = profileElement.querySelector('.popup__input-name');
-const inputAbout = profileElement.querySelector('.popup__input-about');
-const editButton = document.querySelector('.profile-info__edit-button');
+const profileInputName = profileElement.querySelector('.popup__input-name');
+const profileInputAbout = profileElement.querySelector('.popup__input-about');
+const profileEditButton = document.querySelector('.profile-info__edit-button');
 const profileForm = profileElement.querySelector('.profile-form');
 // Переменные для попапа изображения
 const popupImageElement = document.querySelector('.popup-image');
@@ -19,12 +19,12 @@ const closeButtons = document.querySelectorAll('.popup__close-button');
 // Переменные для шаблона элементов
 const elementsList = document.querySelector('.elements__grid');
 // Переменные для добавления элемента
-const addPlaceButton = document.querySelector('.profile__add-button');
-const addPlaceElement = document.querySelector('.popup_add-place');
-const addPlaceSubmitButton = addPlaceElement.querySelector('.popup__button');
-const inputPlace = addPlaceElement.querySelector('.popup__input-place');
-const inputImage = addPlaceElement.querySelector('.popup__input-img');
-const addForm = addPlaceElement.querySelector('.add-form');
+const cardButton = document.querySelector('.profile__add-button');
+const cardElement = document.querySelector('.popup_add-place');
+const cardSubmitButton = cardElement.querySelector('.popup__button');
+const cardInputPlace = cardElement.querySelector('.popup__input-place');
+const cardInputImage = cardElement.querySelector('.popup__input-img');
+const cardForm = cardElement.querySelector('.add-form');
 
 // Действия при нажатии Esc
 const handleEscClick = (e) => {
@@ -67,8 +67,8 @@ function closeImagePopup() {
 
 // Функции попапа редактирования профиля
 function openEditPopup() {
-  inputName.value = profileName.textContent;
-  inputAbout.value = profileAbout.textContent;
+  profileInputName.value = profileName.textContent;
+  profileInputAbout.value = profileAbout.textContent;
   openPopup(profileElement);
 };
 
@@ -78,8 +78,8 @@ function closeEditPopup() {
 
 function handleProfileFormSubmit (e) {
   e.preventDefault();
-  profileName.textContent = inputName.value;
-  profileAbout.textContent = inputAbout.value;
+  profileName.textContent = profileInputName.value;
+  profileAbout.textContent = profileInputAbout.value;
   closeEditPopup();
 };
 
@@ -93,7 +93,7 @@ function handleElementImageClick(link, name) {
 
 // Слушатели попапа редактирования профиля
 profileForm.addEventListener('submit', handleProfileFormSubmit);
-editButton.addEventListener('click', openEditPopup);
+profileEditButton.addEventListener('click', openEditPopup);
 
 // Создание элементов по шаблону
 function createCard(cardData) {
@@ -113,32 +113,32 @@ initialCards.forEach((cardData) => {
 })
 
 // Функции попапа добавления элемента
-function openAddPlacePopup() {
-  addForm.reset();
-  openPopup(addPlaceElement);
+function openCardPopup() {
+  cardForm.reset();
+  openPopup(cardElement);
 };
 
-function closeAddPlacePopup() {
-  closePopup(addPlaceElement);
+function closeCardPopup() {
+  closePopup(cardElement);
 };
 
 function handleAddFormSubmit(e) {
   e.preventDefault();
   const cardData = {
-    name: inputPlace.value,
-    link: inputImage.value
+    name: cardInputPlace.value,
+    link: cardInputImage.value
   }
   renderElement(cardData, elementsList);
-  closeAddPlacePopup();
+  closeCardPopup();
 };
 
 // Создание объектов валидатора форм
 const profileValidation = new FormValidator(validationConfig, profileForm);
-const newCardValidation = new FormValidator(validationConfig, addForm);
+const newCardValidation = new FormValidator(validationConfig, cardForm);
 profileValidation.enableValidation();
 newCardValidation.enableValidation();
 
 // Слушатели попапа добавления элемента
-addPlaceButton.addEventListener('click', openAddPlacePopup);
-addForm.addEventListener('submit', handleAddFormSubmit);
+cardButton.addEventListener('click', openCardPopup);
+cardForm.addEventListener('submit', handleAddFormSubmit);
 
