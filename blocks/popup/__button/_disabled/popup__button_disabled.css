@@ -5,3 +5,7 @@
   opacity: 0.5;
   cursor: default;
 }
+
+.popup__button_disabled:hover {
+  opacity: 0.5;
+}

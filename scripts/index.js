@@ -69,6 +69,7 @@ function closeImagePopup() {
 function openEditPopup() {
   profileInputName.value = profileName.textContent;
   profileInputAbout.value = profileAbout.textContent;
+  profileValidation.resetValidation();
   openPopup(profileElement);
 };
 
@@ -115,6 +116,7 @@ initialCards.forEach((cardData) => {
 // Функции попапа добавления элемента
 function openCardPopup() {
   cardForm.reset();
+  newCardValidation.resetValidation();
   openPopup(cardElement);
 };
 

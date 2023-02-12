@@ -13,36 +13,38 @@ export class FormValidator {
     this._button = this._form.querySelector(this._submitButtonSelector);
   }
 
-  _hideError(error, input) {
+  _hideError(input) {
+    const error = this._form.querySelector(`#${input.id}-error`);
+
     error.textContent = '';
     error.classList.remove(this._errorClass);
     input.classList.remove(this._inputErrorClass);
   }
 
-  _showError(error, input) {
+  _showError(input) {
+    const error = this._form.querySelector(`#${input.id}-error`);
+
     error.textContent = input.validationMessage;
     error.classList.add(this._errorClass);
     input.classList.add(this._inputErrorClass);
   }
 
-  _enableButton(button) {
-    button.classList.remove(this._inactiveButtonClass);
-    button.disabled = false;
+  _enableButton() {
+    this._button.classList.remove(this._inactiveButtonClass);
+    this._button.disabled = false;
   }
 
-  _disableButton(button) {
-    button.classList.add(this._inactiveButtonClass);
-    button.disabled = true;
+  _disableButton() {
+    this._button.classList.add(this._inactiveButtonClass);
+    this._button.disabled = true;
   }
 
   // Проверка валидности и демонстрация ошибки
   _checkInputValidity(input) {
-    const error = this._form.querySelector(`#${input.id}-error`);
-
     if (input.validity.valid) {
-      this._hideError(error, input);
+      this._hideError(input);
     } else {
-      this._showError(error, input);
+      this._showError(input);
     }
   }
 
@@ -51,9 +53,9 @@ export class FormValidator {
     const isFormValid = this._inputs.every(input => input.validity.valid);
 
     if(isFormValid) {
-      this._enableButton(this._button);
+      this._enableButton();
     } else {
-      this._disableButton(this._button);
+      this._disableButton();
     }
   }
 
@@ -61,8 +63,8 @@ export class FormValidator {
   resetValidation() {
     this._toggleSubmitButton();
 
-    this._inputs.forEach((inputElement) => {
-      this._hideError(inputElement);
+    this._inputs.forEach((input) => {
+      this._hideError(input);
     });
   }
 
