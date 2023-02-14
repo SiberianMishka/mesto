@@ -1,9 +1,9 @@
 export class Card {
-  constructor(data, templateSelector, handleElementImageClick) {
+  constructor(data, templateSelector, handleCardClick) {
     this._name = data.name;
     this._link = data.link;
     this._templateSelector = templateSelector;
-    this._handleElementImageClick = handleElementImageClick;
+    this._handleCardClick = handleCardClick;
   }
 
   // Поиск элемента и клонирование шаблона
@@ -54,7 +54,11 @@ export class Card {
       this._handleDeleteButtonClick();
     });
     this._elementImage.addEventListener("click", () => {
-      this._handleElementImageClick(this._link, this._name);
+      this._handleCardClick(this._name, this._link);
     });
   }
 }
+
+// Преобразуйте класс Card
+// Свяжите класс Card c попапом. Сделайте так, чтобы Card принимал в конструктор функцию handleCardClick.
+// Эта функция должна открывать попап с картинкой при клике на карточку.

@@ -19,6 +19,7 @@ _Интерактивный адаптивный одностраничный с
 * Figma
 * Pixel Perfect
 * Github
+* Webpack
 
 ## Ссылка на проект:
 [https://siberianmishka.github.io/mesto/index.html]
