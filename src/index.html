@@ -4,16 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mesto</title>
-    <link rel="stylesheet" href="./pages/index.css">
-    <script defer type="module" src="./pages/index.js"></script>
+    <!-- <link rel="stylesheet" href="./pages/index.css"> -->
+    <!-- <script defer type="module" src="./pages/index.js"></script> -->
   </head>
   <body class="page">
     <header class="header">
-      <img class="header__logo" alt="Логотип Место" src="./images/logo.svg">
+      <img class="header__logo" alt="Логотип Место" src="<%=require('./images/logo.svg')%>">
     </header>
     <main class="content">
       <section class="profile">
-        <img class="profile__avatar" alt="Аватар" src="./images/avatar.jpg">
+        <img class="profile__avatar" alt="Аватар" src="<%=require('./images/avatar.jpg')%>">
         <div class="profile-info">
           <h1 class="profile-info__name">Жак-Ив Кусто</h1>
           <button class="profile-info__edit-button" type="button" aria-label="Редактировать профиль"></button>

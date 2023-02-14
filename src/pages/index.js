@@ -6,6 +6,7 @@ import { PopupWithForm } from "../components/PopupWithForm.js";
 import { PopupWithImage } from "../components/PopupWithImage.js";
 import { Section } from "../components/Section.js";
 import { UserInfo } from "../components/UserInfo.js";
+import './index.css'; // импорт главного файла стилей
 
 // Попапы
 const popupProfile = document.querySelector('.popup_edit-profile');
