@@ -11,13 +11,10 @@ export class PopupWithForm extends Popup {
 
   // Собирает данные всех полей формы
   _getInputValues() {
-    this._formValues = {};
+    this._inputValues = {};
 
-    this._inputs.forEach((input) => {
-      this._formValues[input.name] = input.value;
-    })
-    // console.log(this._formValues);
-    return this._formValues;
+    this._inputs.forEach((input) => { this._inputValues[input.id] = input.value; });
+    return this._inputValues;
   }
 
   setEventListeners() {
@@ -25,7 +22,7 @@ export class PopupWithForm extends Popup {
     // Должен не только добавлять обработчик клика иконке закрытия, но и добавлять обработчик сабмита формы.
     this._form.addEventListener('submit', (e) => {
       this._handleFormSubmit(e, this._getInputValues());
-       this.close();
+      this.close();
     })
   }
 

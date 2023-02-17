@@ -11,6 +11,7 @@ module.exports = {
     publicPath: ''
   },
   mode: 'development',  // Режим разработчика
+  devtool: 'eval-source-map',
   devServer: {
     static: path.resolve(__dirname, './dist'), // путь, куда "смотрит" режим разработчика
     compress: true, // это ускорит загрузку в режиме разработки
@@ -46,7 +47,7 @@ module.exports = {
           options: { importLoaders: 1 }
         },
           // Добавьте postcss-loader
-        'postcss-loader']
+          'postcss-loader']
       },
     ]
   },
@@ -57,5 +58,4 @@ module.exports = {
     new CleanWebpackPlugin(),
     new MiniCssExtractPlugin() // подключение плагина для объединения файлов
   ],
-  // devtool: 'eval-source-map'
 }
