@@ -21,6 +21,8 @@ export class Card {
     this._element = this._getTemplate();
     this._elementImage = this._element.querySelector('.element__image');
     this._elementName = this._element.querySelector('.element__name');
+    this._likeButton = this._element.querySelector('.element__like-button');
+    this._deleteButton = this._element.querySelector('.element__delete-button');
 
     this._elementImage.src = this._link;
     this._elementImage.alt = this._place;
@@ -44,9 +46,6 @@ export class Card {
 
   // Слушатели попапа добавления элемента
   _setEventListeners() {
-    this._likeButton = this._element.querySelector('.element__like-button');
-    this._deleteButton = this._element.querySelector('.element__delete-button');
-
     this._likeButton.addEventListener('click', () => {
       this._handleLikeButtonClick();
     });
@@ -58,7 +57,3 @@ export class Card {
     });
   }
 }
-
-// Преобразуйте класс Card
-// Свяжите класс Card c попапом. Сделайте так, чтобы Card принимал в конструктор функцию handleCardClick.
-// Эта функция должна открывать попап с картинкой при клике на карточку.

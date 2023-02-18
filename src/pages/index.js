@@ -1,4 +1,18 @@
-import { initialCards, validationConfig } from "../utils/constants.js";
+import {
+  initialCards,
+  validationConfig,
+  profileForm,
+  cardAddForm,
+  profileInputName,
+  profileInputAbout,
+  profileOpenButton,
+  cardAddOpenButton,
+  popupImage,
+  cardTemplate,
+  cardsList,
+  profileName,
+  profileAbout
+} from "../utils/constants.js";
 import { FormValidator } from "../components/FormValidator.js";
 import { Card } from "../components/Card.js";
 import { PopupWithForm } from "../components/PopupWithForm.js";
@@ -7,36 +21,19 @@ import { Section } from "../components/Section.js";
 import { UserInfo } from "../components/UserInfo.js";
 import './index.css'; // импорт главного файла стилей
 
-// Попапы
-const popupProfile = document.querySelector('.popup_edit-profile');
-const popupCardAdd = document.querySelector('.popup_add-place');
-// Формы
-const profileForm = popupProfile.querySelector('.popup__form');
-const cardAddForm = popupCardAdd.querySelector('.popup__form');
-// Поля ввода попапа профиля
-const profileInputName = popupProfile.querySelector('.popup__input-name');
-const profileInputAbout = popupProfile.querySelector('.popup__input-about');
-// Кнопки открытия попапов
-const profileOpenButton = document.querySelector('.profile-info__edit-button');
-const cardAddOpenButton = document.querySelector('.profile__add-button');
-// Селекторы
-const popupImageSelector = '.popup-image';
-const cardTemplateSelector = '.element-template';
-const cardsListSelector = '.elements__grid';
-const profileNameSelector = '.profile-info__name';
-const profileAboutSelector = '.profile-info__about';
+
 
 // Открытие попапа изображения
 const handleCardClick = (name, link) => {
   popupWithImage.open(name, link);
 }
 
-const popupWithImage = new PopupWithImage(popupImageSelector);
+const popupWithImage = new PopupWithImage(popupImage);
 popupWithImage.setEventListeners();
 
 // Создание и отрисовка начальных карточек из массива
 const createCard = (cardData) => {
-  const card = new Card(cardData, cardTemplateSelector, handleCardClick);
+  const card = new Card(cardData, cardTemplate, handleCardClick);
   const cardElement = card.generateCard();
   return cardElement;
 }
@@ -48,7 +45,7 @@ const cardElementList = new Section({
     const card = createCard(cardData);
     cardElementList.addItem(card);
   },
-}, cardsListSelector);
+}, cardsList);
 
 cardElementList.renderElements();
 
@@ -70,7 +67,7 @@ cardAddOpenButton.addEventListener('click', () => {
 })
 
 // Отражение информации о пользователе
-const userInfo = new UserInfo({ profileNameSelector, profileAboutSelector });
+const userInfo = new UserInfo({ profileName, profileAbout });
 
 const handleProfileFormSubmit = (e, inputValues) => {
   e.preventDefault();
