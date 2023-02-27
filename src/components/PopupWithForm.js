@@ -7,12 +7,12 @@ export class PopupWithForm extends Popup {
 
     this._form = this._popup.querySelector('.popup__form');
     this._inputs = this._form.querySelectorAll('.popup__input');
-    this._SubmitButton = this._popup.querySelector('.popup__button')
+    this._submitButton = this._popup.querySelector('.popup__button')
   }
 
   // Меняет подпись кнопки
   setButtonText(text) {
-    this._SubmitButton.textContent = text;
+    this._submitButton.textContent = text;
   }
 
   // Собирает данные всех полей формы
@@ -27,7 +27,6 @@ export class PopupWithForm extends Popup {
     super.setEventListeners();
     this._form.addEventListener('submit', (e) => {
       this._handleFormSubmit(e, this._getInputValues());
-      this.close();
     })
   }
 

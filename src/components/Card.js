@@ -58,8 +58,14 @@ export class Card {
   // состояние кнопки удаления
   _checkDeleteButton() {
     if (this._ownerId !== this._userId) {
-      this._deleteButton.style.display = 'none';
+      this._deleteButton.classList.add('element__delete-button_disabled');
     }
+  }
+
+  // Удаление элемента
+  delete() {
+    this._element.remove();
+    this._element = null;
   }
 
   // Слушатели попапа добавления элемента
@@ -81,6 +87,7 @@ export class Card {
     this._elementImage.alt = this._name;
     this._elementName.textContent = this._name;
     this._likeCounter.textContent = this._likes.length;
+
 
     this._checkDeleteButton();
     this.setLikes(this._likes);

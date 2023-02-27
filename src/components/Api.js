@@ -4,6 +4,8 @@ class Api {
     this._headers = headers;
   }
 
+  _checkResponce(res) { res => res.ok ? res.json() : Promise.reject(`Ошибка: ${res.status}`) }
+
   // Загрузка информации о пользователе с сервера
   getUserInfo() {
     return fetch(`${this._baseUrl}users/me`, {
@@ -25,7 +27,6 @@ class Api {
     })
       .then(res => res.ok ? res.json() : Promise.reject(`Ошибка: ${res.status}`))
   }
-
 
   // Загрузка карточек с сервера
   getInitialCards() {

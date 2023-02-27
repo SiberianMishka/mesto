@@ -29,46 +29,27 @@ import { UserInfo } from "../components/UserInfo.js";
 import { api } from "../components/Api.js"
 import './index.css'; // импорт главного файла стилей
 
+let userId = null;
+
+// Создание и отрисовка начальных карточек из массива
 Promise.all([api.getInitialCards(), api.getUserInfo()])
-  .then(res => {
-    userInfo.setUserInfo(res[1]);
-    userInfo.setUserAvatar(res[1]);
-    let cards = res[0].reverse();
-    cardElementList.renderElements(cards, res[1]._id);
+  .then(([initialCards, user]) => {
+    userInfo.setUserInfo(user);
+    userInfo.setUserAvatar(user);
+    let cards = initialCards.reverse();
+    section.renderElements(cards, user._id);
+    userId = user._id;
   })
   .catch(err => console.log(err))
 
-// Открытие попапа изображения
-const handleCardClick = (name, link) => {
-  popupWithImage.open(name, link);
-}
-
-const popupWithImage = new PopupWithImage(popupImage);
-popupWithImage.setEventListeners();
-
-// Попап удаления карточки
-const popupWithConfirmation = new PopupWithConfirmation(
-  popupDeleteConfirm,
-  function handleDeleteClick(e, cardId) {
-    e.preventDefault();
-    api.deleteCard(cardId)
-      .then(res => {
-        popupWithConfirmation.delete();
-        popupWithConfirmation.close();
-      })
-      .catch(err => console.log(err))
-  },
-)
-
-popupWithConfirmation.setEventListeners();
-
-// Создание и отрисовка начальных карточек из массива
 const createCard = (cardData, userId) => {
   const card = new Card(
     cardData,
     userId,
     cardTemplate,
-    handleCardClick,
+    function handleCardClick(name, link) {
+      popupWithImage.open(name, link);
+    },
     function handleLikeClick(cardId) {
       card.checkUserLike()
         ? api.deleteLike(cardId)
@@ -94,20 +75,21 @@ const createCard = (cardData, userId) => {
 const renderer = (cardData, userId) => {
   const card = createCard(cardData, userId);
 
-  cardElementList.addItem(card);
+  section.addItem(card);
 }
 
-const cardElementList = new Section(renderer, cardsList);
+const section = new Section(renderer, cardsList);
 
 // Создание новой карточки и поведение попапа
 const popupAddCardForm = new PopupWithForm(
   popupAddPlace,
   function handleCardAddFormSubmit(e, inputValues) {
-    popupAddCardForm.setButtonText('Сохранение...');
     e.preventDefault();
+    popupAddCardForm.setButtonText('Сохранение...');
     api.addCard(inputValues)
       .then((res) => {
-        renderer(res, res._id);
+        renderer(res, userId);
+        popupAddCardForm.close();
       })
       .catch(err => console.log(err))
       .finally(() => {
@@ -135,7 +117,9 @@ const popupProfileForm = new PopupWithForm(
     api.setUser(inputValues)
       .then((res) => {
         userInfo.setUserInfo(res);
+        popupProfileForm.close();
       })
+      .catch(err => console.log(err))
       .finally(() => {
         popupProfileForm.setButtonText('Сохранить');
       })
@@ -163,6 +147,7 @@ const popupAvatarForm = new PopupWithForm(
       .then((res) => {
         userInfo.setUserAvatar(res);
       })
+      .catch(err => console.log(err))
       .finally(() => {
         popupAvatarForm.setButtonText('Сохранить');
       })
@@ -173,14 +158,36 @@ popupAvatarForm.setEventListeners();
 
 // Открытие попапа изменения аватара
 avatarOpenButton.addEventListener('click', () => {
-  AvatarFormValidation.resetValidation();
+  avatarFormValidation.resetValidation();
   popupAvatarForm.open();
 })
+
+// Попап удаления карточки
+const popupWithConfirmation = new PopupWithConfirmation(
+  popupDeleteConfirm,
+  function handleDeleteSubmit(e, cardId, card) {
+    e.preventDefault();
+    api.deleteCard(cardId, card)
+      .then(() => {
+        card.remove();
+        card = null;
+        popupWithConfirmation.close();
+      })
+      .catch(err => console.log(err))
+  },
+)
+
+popupWithConfirmation.setEventListeners();
+
+// Открытие попапа изображения
+const popupWithImage = new PopupWithImage(popupImage);
+
+popupWithImage.setEventListeners();
 
 // Валидация форм
 const profileFormValidation = new FormValidator(validationConfig, profileForm);
 const formAddCardValidation = new FormValidator(validationConfig, cardAddForm);
-const AvatarFormValidation = new FormValidator(validationConfig, avatarForm);
+const avatarFormValidation = new FormValidator(validationConfig, avatarForm);
 profileFormValidation.enableValidation();
 formAddCardValidation.enableValidation();
-AvatarFormValidation.enableValidation();
+avatarFormValidation.enableValidation();
