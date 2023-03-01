@@ -8,16 +8,16 @@ export class PopupWithConfirmation extends Popup {
     this._form = this._popup.querySelector('.popup__form');
   }
 
-  open(cardId, element) {
+  open(card) {
     super.open();
-    this._cardId = cardId;
-    this._element = element;
+    this._card = card;
   }
 
   setEventListeners() {
     super.setEventListeners();
     this._form.addEventListener('submit', (e) => {
-      this._handleDeleteSubmit(e, this._cardId, this._element);
+      e.preventDefault();
+      this._handleDeleteSubmit(this._card);
     })
   }
 }

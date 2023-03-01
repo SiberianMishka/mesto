@@ -36,7 +36,7 @@ Promise.all([api.getInitialCards(), api.getUserInfo()])
   .then(([initialCards, user]) => {
     userInfo.setUserInfo(user);
     userInfo.setUserAvatar(user);
-    let cards = initialCards.reverse();
+    const cards = initialCards.reverse();
     section.renderElements(cards, user._id);
     userId = user._id;
   })
@@ -63,8 +63,8 @@ const createCard = (cardData, userId) => {
           })
           .catch(err => console.log(err))
     },
-    function handleDeleteButtonClick(cardId, card) {
-      popupWithConfirmation.open(cardId, card);
+    function handleDeleteButtonClick(card) {
+      popupWithConfirmation.open(card);
     }
   );
   const cardElement = card.generateCard();
@@ -83,8 +83,7 @@ const section = new Section(renderer, cardsList);
 // Создание новой карточки и поведение попапа
 const popupAddCardForm = new PopupWithForm(
   popupAddPlace,
-  function handleCardAddFormSubmit(e, inputValues) {
-    e.preventDefault();
+  function handleCardAddFormSubmit(inputValues) {
     popupAddCardForm.setButtonText('Сохранение...');
     api.addCard(inputValues)
       .then((res) => {
@@ -111,9 +110,8 @@ const userInfo = new UserInfo({ profileName, profileAbout, profileAvatar });
 
 const popupProfileForm = new PopupWithForm(
   popupEditProfile,
-  function handleProfileFormSubmit(e, inputValues) {
+  function handleProfileFormSubmit(inputValues) {
     popupProfileForm.setButtonText('Сохранение...');
-    e.preventDefault();
     api.setUser(inputValues)
       .then((res) => {
         userInfo.setUserInfo(res);
@@ -140,9 +138,8 @@ profileOpenButton.addEventListener('click', () => {
 // Попап изменения аватара
 const popupAvatarForm = new PopupWithForm(
   popupEditAvatar,
-  function handleEditAvatar(e, inputValues) {
+  function handleEditAvatar(inputValues) {
     popupAvatarForm.setButtonText('Сохранение...');
-    e.preventDefault();
     api.setAvatar(inputValues)
       .then((res) => {
         userInfo.setUserAvatar(res);
@@ -165,12 +162,10 @@ avatarOpenButton.addEventListener('click', () => {
 // Попап удаления карточки
 const popupWithConfirmation = new PopupWithConfirmation(
   popupDeleteConfirm,
-  function handleDeleteSubmit(e, cardId, card) {
-    e.preventDefault();
-    api.deleteCard(cardId, card)
+  function handleDeleteSubmit(card) {
+    api.deleteCard(card._cardId)
       .then(() => {
-        card.remove();
-        card = null;
+        card.delete();
         popupWithConfirmation.close();
       })
       .catch(err => console.log(err))

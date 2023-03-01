@@ -77,7 +77,7 @@ export class Card {
       this._handleCardClick(this._name, this._link);
     });
     this._deleteButton.addEventListener('click', () => {
-      this._handleDeleteButtonClick(this._cardId, this._element);
+      this._handleDeleteButtonClick(this);
     });
   }
 
